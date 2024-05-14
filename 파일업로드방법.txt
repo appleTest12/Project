@@ -1,0 +1,8 @@
+git config --global user.name [GitHub 이름]
+git config --global user.email [GitHub 이메일]
+해당 폴더에 .git파일을 생성 => git init
+파일 업로드시
+git add.   
+git add 파일명.확장명
+git commit -m "커밋할내용"
+git push -u origin main
