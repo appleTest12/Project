@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.basicBoard.domain.board.mapper.BoardMapper">
+	
+	<select id="getListBoard" parameterType="RequestList" resultType="Board">
+		SELECT BOARD_ID    as boardId
+			 , WRITER      as writer
+			 , TITLE       as title
+			 , CONTENT     as content
+			 , REG_DATE    as regDate
+			 , UPDATE_DATE as updateDate
+			 , DELETE_DATE as deleteDate
+		  FROM BOARD
+		  <where>
+			  <if test="data.title != null and data.title != ''">
+				 AND TITLE LIKE '%' || #{data.title} || '%'
+			  </if>
+			  <if test="data.writer != null and data.writer != ''">
+				 AND WRITER LIKE '%' || #{data.writer} || '%'
+			  </if>
+		  </where>
+		  order by BOARD_ID desc
+	    <!--OFFSET #{pageable.offset} ROWS FETCH NEXT #{pageable.pageSize} ROWS ONLY-->
+	</select>
+	
+	<select id="getListBoardCount" parameterType="Board" resultType="int">
+		SELECT COUNT(*) AS CNT
+		  FROM BOARD
+		  <where>
+		  <if test="title != null and title != ''">
+			 AND TITLE LIKE '%' || #{title} || '%'
+		  </if>
+		  <if test="writer != null and writer != ''">
+			 AND WRITER LIKE '%' || #{writer} || '%'
+		  </if>
+		  </where>
+	</select>
+
+	<select id="getBoardDetail" parameterType="Board" resultType="Board">
+		SELECT BOARD_ID    as boardId
+			 , WRITER      as writer
+			 , TITLE       as title
+			 , CONTENT     as content
+			 , REG_DATE    as regDate
+			 , UPDATE_DATE as updateDate
+			 , DELETE_DATE as deleteDate
+		  FROM BOARD
+		 WHERE BOARD_ID = #{boardId}
+	</select>
+	
+	<update id="getBoardInsert" parameterType="requestList">
+		INSERT 
+		  INTO BOARD( BOARD_ID
+		            , WRITER
+		            , TITLE
+		            , CONTENT
+		            , REG_DATE
+		            )
+		      VALUES( (SELECT NVL(MAX(BOARD_ID), 0) + 1 FROM BOARD)
+		            , '작성자'||(SELECT NVL(MAX(BOARD_ID), 0) + 1 FROM BOARD)
+		            , #{data.title}
+		            , #{data.content}
+		            , SYSDATE
+		            )
+	</update>
+	
+	<update id="getBoardUpdate" parameterType="requestList">
+		UPDATE BOARD
+		   SET TITLE       = #{data.title}
+		     , CONTENT     = #{data.content}
+		     , UPDATE_DATE = SYSDATE
+	     WHERE BOARD_ID    = #{data.boardId}
+	</update>
+	
+	<delete id="getBoardDelete" parameterType="requestList">
+		DELETE 
+		  FROM BOARD
+		 WHERE BOARD_ID = #{data.boardId}
+	</delete>
+</mapper>

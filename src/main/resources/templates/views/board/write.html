@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성폼</title>
+	<script type="text/javascript" src="/js/com-ajax.js"></script>
+</head>
+<style>
+    .layout {
+        width: 500px;
+        margin: 0 auto;
+    }
+
+    .layout input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .layout textarea {
+        width: 100%;
+        margin-top: 10px;
+        min-height: 300px;
+    }
+</style>
+<script>
+	function fn_insert(){
+		const title = document.getElementById("title").value;
+		const content = document.getElementById("content").value;
+		const data = "?title="+title+"&content="+content;
+		AJAX.ajaxCall("GET", "/boards/insert", data, fn_Rtn);
+	}
+	
+	function fn_Rtn(res){
+		if(res){
+			alert("등록되었습니다.");
+			location.href="/board"
+		} else {
+			alert("실패하였습니다.");
+		}
+	}
+
+</script>
+<body>
+    <div class="layout">
+        <input name="title" type="text" id="title"> <br>
+        <textarea name="content" id="content"></textarea> <br>
+        <button onclick="fn_insert()">작성</button>
+		<button><a type="submit" href="/board">뒤로가기</a></button>   
+    </div>
+</body>
+</html>
