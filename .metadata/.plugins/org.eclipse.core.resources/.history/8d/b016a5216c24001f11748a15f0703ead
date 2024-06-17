@@ -1,0 +1,15 @@
+package com.notice.noticeBoard.mapper;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import com.notice.noticeBoard.dao.NoticeDAO;
+
+@Mapper
+public interface NoticeMapper {
+
+	static List<NoticeDAO> getListBoard(NoticeDAO notice) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

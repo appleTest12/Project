@@ -1,0 +1,7 @@
+spring.application.name=notice
+
+spring.datasource.hikari.driver-class-name=oracle.jdbc.OracleDriver
+spring.datasource.hikari.jdbc-url=jdbc:oracle://localhost:1522/oracle?useUnicode=true&characterEncoding=utf-8
+spring.datasource.hikari.username=tiger
+spring.datasource.hikari.password=tiger
+spring.datasource.hikari.connection-test-query=SELECT 1

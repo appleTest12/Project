@@ -1,0 +1,22 @@
+package com.notice.noticeBoard.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.notice.noticeBoard.mapper.NoticeMapper;
+import com.notice.noticeBoard.model.Notice;
+
+@Service
+public class NoticeServiceImpl implements NoticeService {
+
+	@Autowired
+	NoticeMapper noticeMapper;
+
+	@Override
+	public List<Notice> getListBoard(Notice notice, Pageable pageable) {
+		return noticeMapper.getListBoard(notice);
+	}
+}

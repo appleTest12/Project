@@ -1,0 +1,5 @@
+package com.example.notice.config;
+
+public class DatabaseConfig {
+
+}

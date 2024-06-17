@@ -1,0 +1,5 @@
+package com.example.notice.service;
+
+public interface NoticeService {
+
+}

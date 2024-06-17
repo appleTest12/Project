@@ -1,0 +1,17 @@
+package com.notice.noticeBoard.model;
+
+public class Notice {
+
+	private int noticeId;
+	private String writer;
+	private String title;
+	private String content;
+	private String regDate;
+	
+	public int getNoticeId() {
+		return noticeId;
+	}
+	public void setNoticeId(int noticeId) {
+		this.noticeId = noticeId;
+	}
+}

@@ -1,0 +1,11 @@
+spring.application.name=notice
+
+spring.datasource.hikari.driver-class-name=oracle.jdbc.OracleDriver
+spring.datasource.hikari.jdbc-url=jdbc:oracle:thin:@localhost:1522/oracle
+spring.datasource.hikari.username=tiger
+spring.datasource.hikari.password=tiger
+
+mybatis.configuration.map-underscore-to-camel-case=true
+classpath:mapper///*.xml
+configuration:
+jdbc-type-for-null: 'NULL'

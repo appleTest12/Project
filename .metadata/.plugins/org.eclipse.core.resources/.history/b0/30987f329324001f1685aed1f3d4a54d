@@ -1,0 +1,17 @@
+package com.notice.noticeBoard.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.notice.noticeBoard.fragments.common.data.RequestList;
+import com.notice.noticeBoard.model.Notice;
+
+@Mapper
+public interface NoticeMapper {
+
+	List<Map<String, Object>> getListBoard(RequestList requestList);
+	
+	int getListBoardCount(Notice notice);
+}

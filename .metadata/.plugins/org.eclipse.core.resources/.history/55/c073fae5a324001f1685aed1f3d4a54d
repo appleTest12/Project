@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.notice.noticeBoard.mapper.NoticeMapper">
+	
+	<select id="getListBoard" parameterType="RequestList" resultType="Notice">
+		SELECT NOTICE_ID
+			,WRITER
+			,TITLE
+			,CONTENT
+			,REGDATE
+		FROM NOTICE
+		<where>
+		  <if test="title != null and title != ''">
+			 AND TITLE LIKE '%' || #{title} || '%'
+		  </if>
+		  <if test="writer != null and writer != ''">
+			 AND WRITER LIKE '%' || #{writer} || '%'
+		  </if>
+		  </where>
+		OFFSET #{pageable.offset} ROWS FETCH NEXT #{pageable.pageSize} ROWS ONLY
+	</select>
+	
+	<select id="getListBoardCount" parameterType="Notice" resultType="int">
+		SELECT COUNT(*) AS CNT
+		  FROM NOTICE
+		  <where>
+		  <if test="title != null and title != ''">
+			 AND TITLE LIKE '%' || #{title} || '%'
+		  </if>
+		  <if test="writer != null and writer != ''">
+			 AND WRITER LIKE '%' || #{writer} || '%'
+		  </if>
+		  </where>
+	</select>
+</mapper>

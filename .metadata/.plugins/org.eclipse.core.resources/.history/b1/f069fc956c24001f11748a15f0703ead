@@ -1,0 +1,15 @@
+package com.notice.noticeBoard.dao;
+
+import lombok.Data;
+
+@Data
+public class NoticeDAO {
+
+	private int boardId;
+	private String writer;
+	private String title;
+	private String content;
+	private String regDate;
+	private String updateDate;
+	private String deleteDate;
+}

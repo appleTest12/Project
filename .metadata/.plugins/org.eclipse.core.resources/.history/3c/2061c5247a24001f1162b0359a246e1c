@@ -1,0 +1,25 @@
+package com.notice.noticeBoard.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.notice.noticeBoard.model.Notice;
+import com.notice.noticeBoard.service.NoticeService;
+
+@RestController
+@RequestMapping(value = "/notices")
+public class NoticeController {
+
+	@Autowired
+	NoticeService noticeService;
+
+	@GetMapping("")
+	public ResponseEntity<List<Notice>> getListBoard(Notice notice) {
+		return ResponseEntity.ok(noticeService.getListBoard(notice));
+	}
+}

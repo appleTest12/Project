@@ -1,0 +1,12 @@
+package com.notice.noticeBoard.mapper;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import com.notice.noticeBoard.model.Notice;
+
+@Mapper
+public interface NoticeMapper {
+
+	List<Notice> getListBoard(Notice notice);
+}

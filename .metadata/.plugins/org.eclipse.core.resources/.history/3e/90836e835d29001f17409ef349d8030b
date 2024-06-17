@@ -1,0 +1,10 @@
+package com.example.notice.service;
+
+import java.util.List;
+
+import com.example.notice.model.Notice;
+
+public interface NoticeService {
+
+	List<Notice> selectBoardList() throws Exception;
+}

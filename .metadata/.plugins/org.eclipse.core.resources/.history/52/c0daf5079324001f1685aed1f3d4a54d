@@ -1,0 +1,13 @@
+package com.notice.noticeBoard.fragments.common.data;
+
+import org.springframework.data.domain.Pageable;
+import lombok.Builder;
+import lombok.Data;
+
+@Builder
+@Data
+public class RequestList {
+
+	private T data;
+	private Pageable pageable;
+}

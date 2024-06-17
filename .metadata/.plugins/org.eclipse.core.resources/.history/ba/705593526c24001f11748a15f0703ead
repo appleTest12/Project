@@ -1,0 +1,18 @@
+package com.notice.noticeBoard.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.notice.noticeBoard.dao.NoticeDAO;
+import com.notice.noticeBoard.mapper.NoticeMapper;
+
+public class NoticeServiceImpl {
+
+	@Autowired
+	NoticeDAO noticeDAO;
+
+	public List<NoticeDAO> getListBoard(NoticeDAO notice) {
+		return NoticeMapper.getListBoard(notice);
+	}
+}

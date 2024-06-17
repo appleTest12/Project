@@ -1,0 +1,5 @@
+package com.example.notice.model;
+
+public class Notice {
+
+}

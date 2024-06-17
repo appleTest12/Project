@@ -1,0 +1,17 @@
+package com.example.notice.model;
+
+import lombok.Data;
+
+@Data
+public class Notice {
+
+	private int notice_id;		// 게시글ID
+	private String title;		// 제목
+	private String writer;		// 작성자
+	private String contents;	// 내용
+	private int hit_cnt;		// 조회수
+	private String created_At;	// 작성시간
+	private String updated_At;	// 수정시간
+	private String updater_id;  // 수정자
+	private int is_deleted;		// 삭제여부
+}

@@ -1,0 +1,10 @@
+package com.notice.noticeBoard.model;
+
+public class Notice {
+
+	private int noticeId;
+	private String writer;
+	private String title;
+	private String content;
+	private String regDate;
+}

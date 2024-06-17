@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+												
+<mapper namespace="com.example.notice.mapper.NoticeMapper">   <!-- mapper의 네임스페이스를 지정 인터페이스의 경로 -->
+	<!-- 쿼리 id 해당 (id를 이용하여 질의를 찾아 수행함), 실행 결과를 어떤 형식으로 반환할 것인지 -->
+    <select id="selectNoticeList" resultType="com.example.notice.model.Notice"> 
+		<![CDATA[
+				SELECT notice_id
+					 , title
+					 , hit_cnt
+					 , TO_CHAR(SYSDATE, 'YYYY-MM-DD') as regDate
+				FROM T_NOTICE
+				WHERE is_deleted='N'
+				ORDER BY notice_id DESC
+		]]>
+	</select>
+	
+	<insert id="insertNotice" parameterType="com.example.notice.model.Notice">
+  	<![CDATA[
+	    INSERT INTO T_NOTICE(
+	    					  notice_id
+	    					  , title
+	    					  , content
+	    					  , regDate
+	    					  , writer
+	    					  , updated_At
+	    					  , updater_id
+						    ) 
+					VALUES (
+							(SELECT NVL(MAX(NOTICE_ID), 0) + 1 FROM T_NOTICE)
+							, #{title, jdbcType=VARCHAR}
+							, #{content, jdbcType=VARCHAR}
+							, SYSDATE
+							, 'admin'
+							, #{updated_At, jdbcType=VARCHAR}
+							, #{updater_id, jdbcType=VARCHAR}
+	   					   )
+ 	 ]]>
+	</insert>
+	
+	<update id="updateHitCount" parameterType="int">
+	  <![CDATA[
+			    UPDATE T_NOTICE
+			    SET hit_cnt = hit_cnt+1
+			    WHERE notice_id = #{notice_id}
+	  ]]>
+	</update>
+    
+	<select id="selectNoticeDetail" parameterType="int" resultType="com.example.notice.model.Notice">
+	  <![CDATA[
+		    SELECT notice_id
+		    	 , title
+		    	 , content
+		    	 , hit_cnt
+		    	 , TO_CHAR(SYSDATE, 'YYYY-MM-DD') as regDate
+		    	 , writer
+		    FROM T_NOTICE
+		    WHERE notice_id = #{notice_id} 
+		    AND is_deleted ='N'
+	  ]]>
+	</select>
+
+
+
+
+
+
+
+
+
+</mapper>

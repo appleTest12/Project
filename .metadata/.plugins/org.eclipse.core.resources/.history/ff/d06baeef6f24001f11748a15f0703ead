@@ -1,0 +1,22 @@
+package com.notice.noticeBoard.fragments.common.Controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+public class WebController {
+
+	/**
+	 * 기본 경로 : 게시판 페이지 호출
+	 */
+	@GetMapping("")
+	public String home() {
+		return "redirect:notice";
+	}
+
+	/**
+	 * 게시판 페이지 호출
+	 */
+	@GetMapping("/notice")
+	public void notice() {
+		return "views/notice/List";
+	}
+}

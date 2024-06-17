@@ -1,0 +1,11 @@
+package com.notice.noticeBoard.service;
+
+import java.util.List;
+
+import com.notice.noticeBoard.dao.NoticeDAO;
+
+public interface NoticeService {
+	
+	public List<Notice> getListBoard(Notice notice);
+
+}

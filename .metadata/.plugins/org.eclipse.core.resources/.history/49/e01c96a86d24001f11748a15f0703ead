@@ -1,0 +1,5 @@
+package com.notice.noticeBoard.fragments.common.Controller;
+
+public class WebController {
+
+}

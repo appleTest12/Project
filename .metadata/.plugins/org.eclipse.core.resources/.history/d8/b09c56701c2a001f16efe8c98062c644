@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+												
+<mapper namespace="com.example.notice.mapper.NoticeMapper">   <!-- mapper의 네임스페이스를 지정 인터페이스의 경로 -->
+	<!-- 쿼리 id 해당 (id를 이용하여 질의를 찾아 수행함), 실행 결과를 어떤 형식으로 반환할 것인지 -->
+    <select id="selectNoticeList" resultType="com.example.notice.model.Notice"> 
+		<![CDATA[
+				SELECT NOTICE_ID
+					 , TITLE
+					 , HIT_CNT
+					 , TO_CHAR(SYSDATE, 'YYYY-MM-DD') as REGDATE
+					 , CONTENT
+					 , WRITER
+					 , TO_CHAR(SYSDATE, 'YYYY-MM-DD') as UPDATED_AT
+					 , UPDATER_ID
+				FROM T_NOTICE
+				WHERE IS_DELETED = 'N'
+				ORDER BY NOTICE_ID DESC
+		]]>
+	</select>
+	
+	<insert id="insertNotice" parameterType="com.example.notice.model.Notice">
+  	<![CDATA[
+		    INSERT INTO T_NOTICE(
+		    					  NOTICE_ID
+		    					  , TITLE
+		    					  , CONTENT
+		    					  , REGDATE
+		    					  , WRITER
+							    ) 
+						VALUES (
+								(SELECT NVL(MAX(NOTICE_ID), 0) + 1 FROM T_NOTICE)
+								, #{title, jdbcType=VARCHAR}
+								, #{content, jdbcType=VARCHAR}
+								, SYSDATE
+								, 'admin'
+		   					   )
+ 	 ]]>
+	</insert>
+	
+	<update id="updateHitCount" parameterType="int">
+	  <![CDATA[
+			    UPDATE T_NOTICE
+			    SET HIT_CNT = HIT_CNT+1
+			    WHERE NOTICE_ID = #{noticeId}
+	  ]]>
+	</update>
+    
+	<select id="selectNoticeDetail" parameterType="int" resultType="com.example.notice.model.Notice">
+	  <![CDATA[
+			    SELECT NOTICE_ID
+			    	 , TITLE
+			    	 , CONTENT
+			    	 , HIT_CNT
+			    	 , TO_CHAR(SYSDATE, 'YYYY-MM-DD') as REGDATE
+			    	 , WRITER
+			    FROM T_NOTICE
+			    WHERE NOTICE_ID = #{noticeId} 
+			    AND IS_DELETED = 'N'
+	  ]]>
+	</select>
+
+	<update id="updateNotice" parameterType="com.example.notice.model.Notice">
+	  <![CDATA[
+			    UPDATE T_NOTICE
+			    	SET 
+				    	  TITLE = #{title}
+				    	, CONTENT = #{content}
+				    	, UPDATER_ID = 'admin'
+				    	, UPDATED_AT = SYSDATE
+			    WHERE NOTICE_ID = #{noticeId}
+	  ]]>
+	</update>
+
+	<update id="deleteNotice" parameterType="int">
+	  <![CDATA[
+			    UPDATE T_NOTICE
+				    SET  is_deleted = 'y'
+				    	, updater_id = 'admin'
+				        , updated_At = SYSDATE
+				    WHERE notice_id = #{noticeId} 
+	  ]]>
+	</update>
+
+
+
+
+
+
+
+</mapper>
